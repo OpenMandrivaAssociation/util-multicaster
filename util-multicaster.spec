@@ -3,7 +3,7 @@
 
 Name:           util-multicaster
 Version:        0.3.3
-Release:        %mkrel 0.0.3
+Release:        %mkrel 0.0.4
 Epoch:          0
 Summary:        org.freecompany.util
 License:        MIT
