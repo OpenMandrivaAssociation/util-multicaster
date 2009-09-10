@@ -3,9 +3,9 @@
 
 Name:           util-multicaster
 Version:        0.3.3
-Release:        %mkrel 0.0.4
+Release:        %mkrel 0.0.5
 Epoch:          0
-Summary:        org.freecompany.util
+Summary:        Utility classes for low-cost event dispatch to multiple listeners
 License:        MIT
 Group:          Development/Java
 URL:            http://www.freecompany.org/
@@ -26,7 +26,16 @@ BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
-org.freecompany.util
+The multicaster package provides utility classes for low-cost event dispatch 
+to multiple listeners. Modeled after the AWTEventMulticaster this class 
+provides type-safe and thread-safe generic method dispatch. The benefit of 
+this approach to handling multiple listeners is the low overhead - when there 
+is a single listener there is zero cost, and each additional listener requires 
+only two additional method calls.
+
+A basic implementation is provided, the DefaultMulticaster, which uses dynamic 
+proxies to minimize the amount of new code that must be written in order to use 
+a multicaster.
 
 %package javadoc
 Summary:        Javadoc for %{name}
