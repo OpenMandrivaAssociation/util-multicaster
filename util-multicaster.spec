@@ -23,7 +23,6 @@ BuildRequires:  java-gcj-compat-devel
 BuildRequires:  java-devel
 BuildArch:      noarch
 %endif
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The multicaster package provides utility classes for low-cost event dispatch 
@@ -46,8 +45,8 @@ Javadoc for %{name}.
 
 %prep
 %setup -q
-%{__cp} -a %{SOURCE1} build.xml
-%{__perl} -pi -e 's|<javac|<javac nowarn="true"|g' build.xml
+cp -a %{SOURCE1} build.xml
+perl -pi -e 's|<javac|<javac nowarn="true"|g' build.xml
 
 %build
 export CLASSPATH=$(build-classpath junit)
@@ -55,22 +54,19 @@ export OPT_JAR_LIST="ant/ant-junit"
 %{ant} jar javadoc test
 
 %install
-%{__rm} -rf %{buildroot}
+rm -rf %{buildroot}
 
-%{__mkdir_p} %{buildroot}%{_javadir}
-%{__cp} -a dist/%{name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
+mkdir -p %{buildroot}%{_javadir}
+cp -af dist/%{name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
 (cd %{buildroot}%{_javadir} && for jar in *-%{version}*; do %{__ln_s} ${jar} ${jar/-%{version}/}; done)
 
-%{__mkdir_p} %{buildroot}%{_javadocdir}/%{name}-%{version}
-%{__cp} -a dist/doc/* %{buildroot}%{_javadocdir}/%{name}-%{version}
+mkdir -p %{buildroot}%{_javadocdir}/%{name}-%{version}
+cp -ra dist/doc/* %{buildroot}%{_javadocdir}/%{name}-%{version}
 %{__ln_s} %{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
 
 %if %{gcj_support}
 %{_bindir}/aot-compile-rpm
 %endif
-
-%clean
-%{__rm} -rf %{buildroot}
 
 %if %{gcj_support}
 %post

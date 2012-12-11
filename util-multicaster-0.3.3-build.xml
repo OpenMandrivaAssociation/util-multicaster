@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="util-multicaster" default="jar" basedir=".">
+   <property name="src" value="source/main"/>
+   <property name="build" value="build"/>
+   <property name="dist" value="dist"/>
+   <property name="project.name" value="util-multicaster"/>
+
+   <property name="pkg" value="${package.name}"/>
+   <property name="jar" value="${project.name}.jar"/>
+
+   <!-- Override any defined properties -->
+   <property file="build.properties"/>
+
+   <target name="init">
+      <tstamp/>
+      <mkdir dir="${build}"/>
+      <mkdir dir="${dist}"/>
+      <mkdir dir="${dist}/doc"/>
+      <mkdir dir="tests"/>
+   </target>
+
+   <target name="compile" depends="init">
+	   <javac source="1.5" srcdir="${src}" destdir="${build}" classpath="${classpath}" excludes=""/>
+   </target>
+
+   <target name="manifest" depends="init">
+      <manifest file="${build}/MANIFEST.MF" mode="update">
+         <attribute name="Built-By" value="Mandriva Linux"/>
+      </manifest>
+   </target>
+   
+   <target name="jar" depends="compile,manifest">
+      <jar jarfile="${dist}/${jar}" manifest="${build}/MANIFEST.MF">
+	      <fileset dir="${build}" includes="**/*.class"/>
+      </jar>
+   </target>
+
+   <target name="javadoc" depends="compile">
+      <javadoc destdir="${dist}/doc/api">
+      	<fileset dir="${src}"/>
+      </javadoc>
+   </target>
+
+   <target name="clean">
+      <delete dir="${build}"/>
+      <delete dir="${dist}"/>
+      <delete dir="tests"/>
+   </target>
+
+   <target name="compile-tests" depends="init">
+	   <javac source="1.5" srcdir="source/test" destdir="tests" classpath="${build}:${classpath}" excludes=""/>
+   </target>
+
+   <target name="test" depends="compile,compile-tests">
+      <junit printSummary="yes" haltonerror="true" haltonfailure="true" fork="false" dir=".">
+      <sysproperty key="basedir" value="."/>
+      <formatter type="xml"/>
+      <formatter type="plain" usefile="false"/>
+      <classpath>
+        <pathelement location="${build}"/>
+        <pathelement location="tests"/>
+      </classpath>
+      <batchtest todir="tests">
+        <fileset dir="source/test">
+          <include name="**/*Test.java"/>
+          <exclude name="**/*Abstract*Test.java"/>
+        </fileset>
+      </batchtest>
+    </junit>
+   </target>
+</project>
