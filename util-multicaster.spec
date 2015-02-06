@@ -3,7 +3,7 @@
 
 Name:           util-multicaster
 Version:        0.3.3
-Release:        %mkrel 0.0.5
+Release:        0.0.6
 Epoch:          0
 Summary:        Utility classes for low-cost event dispatch to multiple listeners
 License:        MIT
