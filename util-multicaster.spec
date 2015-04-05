@@ -18,7 +18,7 @@ BuildRequires:  ant-junit
 BuildRequires:  java-rpmbuild >= 0:1.6
 BuildRequires:  junit
 %if %{gcj_support}
-BuildRequires:  java-devel-gcj
+BuildRequires:  java-1.4.2-gcj-compat-devel
 %else
 BuildRequires:  java-devel
 BuildArch:      noarch
