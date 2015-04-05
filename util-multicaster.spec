@@ -1,5 +1,6 @@
 %define section         free
-%define gcj_support     1
+# according to crisb dead upstream. sflo
+%define gcj_support     0
 
 Name:           util-multicaster
 Version:        0.3.3
