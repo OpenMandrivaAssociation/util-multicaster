@@ -9,7 +9,7 @@ Epoch:          0
 Summary:        Utility classes for low-cost event dispatch to multiple listeners
 License:        MIT
 Group:          Development/Java
-URL:            http://www.freecompany.org/
+URL:            https://www.freecompany.org/
 # svn export https://svn.freecompany.org/public/util/tags/util-multicaster-0.3.3
 # zip -9r util-multicaster-src-0.3.3.zip util-multicaster-0.3.3
 Source0:        http://repository.freecompany.org/org/freecompany/util/zips/util-multicaster-src-%{version}.zip
